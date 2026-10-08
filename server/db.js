@@ -8,6 +8,8 @@ import { hashPassword } from './security.js';
 const DATABASE_URL = process.env.DATABASE_URL || process.env.POSTGRES_URL;
 const PROD = process.env.NODE_ENV === 'production';
 export const DATA_DIR = process.env.DATA_DIR || join(import.meta.dirname, '..', 'data');
+// Giriş ekranında gösterilen herkese açık demo üye. Gerçek yayından önce DEMO_ACCOUNT=0 ile kapatın.
+export const DEMO = process.env.DEMO_ACCOUNT === '0' ? null : { email: 'uye@pati.local', password: 'Uye12345', name: 'Demo Üye' };
 
 let driver;
 async function getDriver() {
@@ -154,6 +156,7 @@ const SAMPLE_TEXT = {
 async function init() {
   const { ADMIN_EMAIL, ADMIN_PASSWORD, ADMIN_NAME = 'Çiftlik Yöneticisi' } = process.env;
   const adminHash = ADMIN_EMAIL && ADMIN_PASSWORD ? await hashPassword(ADMIN_PASSWORD) : null;
+  const demoHash = DEMO ? await hashPassword(DEMO.password) : null;
   let devPassword = null;
   // Birden çok sunucusuz örnek aynı anda açılırsa kurulumun tek seferde yapılması için kilit.
   await tx(async q => {
@@ -164,6 +167,10 @@ async function init() {
         await q(`INSERT INTO listings (title, category, animal, breed, city, age, sex, description, photo, status, is_sample, featured_until)
           VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, 'approved', true, CASE WHEN $10::boolean THEN now() + interval '3650 days' END)`,
         [title, category, animal, breed, city, age, sex, SAMPLE_TEXT[category], unsplash(photo), featured]);
+    }
+    if (demoHash) {
+      await q(`INSERT INTO users (email, name, password_hash) VALUES ($1, $2, $3)
+        ON CONFLICT (email) DO UPDATE SET password_hash = EXCLUDED.password_hash, role = 'user'`, [DEMO.email, DEMO.name, demoHash]);
     }
     if (adminHash) {
       await q(`INSERT INTO users (email, name, password_hash, role) VALUES ($1, $2, $3, 'admin')

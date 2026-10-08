@@ -13,6 +13,8 @@ npm start
 
 Tarayıcıda http://localhost:3000 adresini açın. İlk açılışta yönetici hesabı yoksa terminale `admin@pati.local` için tek seferlik bir şifre yazdırılır. Kalıcı yönetici için `.env.example` dosyasını `.env` olarak kopyalayıp `ADMIN_EMAIL` ve `ADMIN_PASSWORD` girin (her açılışta bu hesap yönetici yapılır ve şifresi güncellenir).
 
+Giriş ekranında herkese açık bir **demo hesap** (`uye@pati.local` / `Uye12345`) gösterilir; sunucu bu hesabı kendisi oluşturur ve kredisi 10'un altına düşünce girişte 50'ye tamamlar. Gerçek yayından önce `DEMO_ACCOUNT=0` ile kapatın.
+
 Geliştirirken `npm run dev` sunucuyu dosya değişikliklerinde yeniden başlatır. Sözdizimi kontrolü: `npm run check`.
 
 ## Yapı
@@ -47,6 +49,7 @@ Geliştirirken `npm run dev` sunucuyu dosya değişikliklerinde yeniden başlat�
 3. **Settings → Environment Variables** bölümüne ekleyin:
    - `ADMIN_EMAIL`, `ADMIN_PASSWORD` — yönetici hesabı (güçlü bir şifre seçin).
    - `PAYMENT_PROVIDER=test` — gerçek ödeme bağlanana kadar kredi alımını test modunda açmak için. Eklenmezse satış kapalı kalır.
-4. **Redeploy**. Tablolar ve örnek ilanlar ilk API isteğinde otomatik oluşturulur.
+4. **Redeploy** (ortam değişkenleri yalnızca yeni yayında geçerli olur). Tablolar ve örnek ilanlar ilk API isteğinde otomatik oluşturulur.
+5. Kontrol: `https://<site>/api/health` hangi parçanın (veritabanı, Blob, yönetici, ödeme modu) eksik olduğunu gösterir.
 
 Not: Giriş denemesi sınırlaması bellek içidir; sunucusuz ortamda her örnek için ayrı sayılır.

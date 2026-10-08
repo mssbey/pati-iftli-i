@@ -399,6 +399,12 @@ function authPage(mode) {
       <h1>${reg ? 'Hesap oluşturun' : 'Tekrar hoş geldiniz'}</h1>
       <p>${reg ? 'Birkaç saniyede ücretsiz üye olun.' : 'Hesabınıza giriş yaparak devam edin.'}</p>
       ${notice ? `<div class="notice">${ic('lock')}<span>${esc(notice)}</span></div>` : ''}
+      ${state.config.demo ? `<div class="demo-box">
+        <div class="demo-head"><span class="demo-icon">${ic('spark')}</span><div><b>Demo hesapla deneyin</b><small>Kredisi hazır; ilan verip kredi akışını hemen görebilirsiniz.</small></div></div>
+        <div class="demo-creds"><span>${ic('mail')} ${esc(state.config.demo.email)}</span><span>${ic('lock')} ${esc(state.config.demo.password)}</span></div>
+        <button type="button" class="btn lime block" id="demo-login">${ic('right')} Demo hesapla giriş yap</button>
+      </div>
+      <div class="or"><span>${reg ? 'ya da yeni hesap oluşturun' : 'ya da kendi hesabınızla'}</span></div>` : ''}
       <form class="form" id="auth-form">
         ${reg ? `<label>Ad soyad<span class="input-icon">${ic('user')}<input name="name" required minlength="2" maxlength="60" autocomplete="name" placeholder="Adınız Soyadınız"></span></label>` : ''}
         <label>E-posta<span class="input-icon">${ic('mail')}<input name="email" type="email" required maxlength="120" autocomplete="email" placeholder="ornek@eposta.com"></span></label>
@@ -412,6 +418,22 @@ function authPage(mode) {
   </section>`);
 
   const form = $('#auth-form');
+  const demoBtn = $('#demo-login');
+  if (demoBtn) demoBtn.onclick = async () => {
+    busy(demoBtn, true);
+    try {
+      setAccount(await api('/api/auth/login', { method: 'POST', body: state.config.demo }));
+      renderHeader();
+      renderPricing();
+      toast(`Demo hesapla giriş yaptınız. Bakiyeniz: ${num(state.balance)} kredi.`);
+      const next = state.next || '#/ilan-ver';
+      state.next = null;
+      location.replace(next);
+    } catch (ex) {
+      toast(ex.message, 'error');
+      busy(demoBtn, false);
+    }
+  };
   $('.pw-toggle', form).onclick = e => {
     const input = form.password;
     input.type = input.type === 'password' ? 'text' : 'password';

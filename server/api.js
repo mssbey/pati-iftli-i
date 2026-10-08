@@ -1,5 +1,5 @@
 import { randomBytes } from 'node:crypto';
-import { query, one, tx, balanceOf, ready } from './db.js';
+import { query, one, tx, balanceOf, ready, DEMO } from './db.js';
 import { storeImage, deleteImage, storageReady } from './storage.js';
 import { hashPassword, verifyPassword, newToken, sha256 } from './security.js';
 
@@ -24,6 +24,7 @@ const SESSION_DAYS = 30;
 const TR_DAY = col => `((${col} AT TIME ZONE 'UTC') + interval '3 hours')::date`;
 const CATEGORIES = ['adoption', 'mate', 'lost', 'accessory'];
 const ANIMALS = ['dog', 'cat', 'other'];
+const DEMO_TOPUP = 50;
 let dummyHash;
 
 export class HttpError extends Error {
@@ -39,7 +40,7 @@ const routes = [];
 function route(method, path, handler, opts = {}) {
   const keys = [];
   const re = new RegExp('^' + path.replace(/:(\w+)/g, (_, k) => (keys.push(k), '(\\d+)')) + '$');
-  routes.push({ method, re, keys, handler, auth: false, admin: false, limit: 64 * 1024, status: 200, ...opts });
+  routes.push({ method, re, keys, handler, auth: false, admin: false, db: true, limit: 64 * 1024, status: 200, ...opts });
 }
 
 function clientIp(req) {
@@ -178,7 +179,28 @@ const addLedger = (q, userId, amount, reason, ref) =>
 
 /* ---------- genel ---------- */
 
-route('GET', '/api/config', () => ({ packages: PACKAGES, costs: COSTS, featureDays: FEATURE_DAYS, paymentMode: PAYMENT_MODE }));
+route('GET', '/api/config', () => ({
+  packages: PACKAGES, costs: COSTS, featureDays: FEATURE_DAYS, paymentMode: PAYMENT_MODE,
+  demo: DEMO && { email: DEMO.email, password: DEMO.password },
+}), { db: false });
+
+// Yayın teşhisi: gizli bilgi döndürmez, yalnızca hangi parçanın eksik olduğunu söyler.
+route('GET', '/api/health', async () => {
+  const health = {
+    database: 'ok',
+    databaseUrl: Boolean(process.env.DATABASE_URL || process.env.POSTGRES_URL),
+    photoStorage: storageReady() ? 'ok' : 'BLOB_READ_WRITE_TOKEN eksik',
+    paymentMode: PAYMENT_MODE,
+    adminFromEnv: Boolean(process.env.ADMIN_EMAIL && process.env.ADMIN_PASSWORD),
+    demoAccount: Boolean(DEMO),
+  };
+  try {
+    await ready();
+  } catch (error) {
+    health.database = dbErrorMessage(error);
+  }
+  return health;
+}, { db: false });
 
 route('GET', '/api/stats', async () => {
   const rows = await query(`SELECT category, COUNT(*)::int AS n FROM listings WHERE status = 'approved' GROUP BY category`);
@@ -212,6 +234,12 @@ route('POST', '/api/auth/login', async ({ req, res, body }) => {
   dummyHash ??= await hashPassword(randomBytes(12).toString('hex'));
   const ok = await verifyPassword(password, user?.password_hash ?? dummyHash);
   if (!user || !ok) throw new HttpError(401, 'E-posta veya şifre hatalı.');
+  // Demo hesabın kredisi bitmesin: bakiye 10 kredinin altına düştüyse girişte 50 krediye tamamlanır.
+  if (DEMO && mail === DEMO.email) {
+    const balance = await balanceOf(user.id);
+    if (balance < COSTS.feature)
+      await addLedger(query, user.id, DEMO_TOPUP - balance, 'Demo hesap kredi yüklemesi', `demo-topup:${Date.now()}:${randomBytes(4).toString('hex')}`);
+  }
   await startSession(res, user.id);
   return account(user.id);
 });
@@ -223,7 +251,7 @@ route('POST', '/api/auth/logout', async ({ req, res }) => {
   return { ok: true };
 });
 
-route('GET', '/api/auth/me', ({ user }) => (user ? account(user.id) : { user: null, balance: 0 }));
+route('GET', '/api/auth/me', ({ user }) => (user ? account(user.id) : { user: null, balance: 0 }), { db: 'session' });
 
 /* ---------- ilanlar ---------- */
 
@@ -458,6 +486,11 @@ route('GET', '/api/admin/users', async () => ({
 
 /* ---------- dağıtıcı ---------- */
 
+function dbErrorMessage(error) {
+  const reason = String(error?.message || error).replace(/postgres(ql)?:\/\/\S+/gi, '[bağlantı adresi]').slice(0, 200);
+  return `Veritabanına bağlanılamadı: ${reason}`;
+}
+
 export async function handleApi(req, res, url) {
   const send = (status, data) => {
     res.statusCode = status;
@@ -469,9 +502,18 @@ export async function handleApi(req, res, url) {
     const match = routes.map(r => ({ r, m: req.method === r.method && url.pathname.match(r.re) })).find(x => x.m);
     if (!match) throw new HttpError(404, 'Bulunamadı.');
     const { r, m } = match;
-    await ready();
+    // Oturumsuz ziyaretçinin /me isteği veritabanı gerektirmez; ana sayfa DB sorunu olsa da açılır.
+    const needsDb = r.db === true || (r.db === 'session' && sessionToken(req));
+    if (needsDb) {
+      try {
+        await ready();
+      } catch (error) {
+        console.error(error);
+        throw new HttpError(503, dbErrorMessage(error));
+      }
+    }
     const params = Object.fromEntries(r.keys.map((k, i) => [k, Number(m[i + 1])]));
-    const user = await currentUser(req);
+    const user = needsDb ? await currentUser(req) : null;
     if ((r.auth || r.admin) && !user) throw new HttpError(401, 'Bu işlem için giriş yapmalısınız.');
     if (r.admin && user.role !== 'admin') throw new HttpError(403, 'Bu alan yalnızca yöneticilere açık.');
     const body = req.method === 'GET' ? {} : await readBody(req, r.limit);
