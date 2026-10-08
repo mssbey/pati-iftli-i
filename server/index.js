@@ -2,7 +2,7 @@
 import http from 'node:http';
 import { readFile } from 'node:fs/promises';
 import { join, extname, normalize, sep } from 'node:path';
-import { ready } from './db.js';
+import { ready, DATABASE_URL_KEY } from './db.js';
 import { UPLOAD_DIR } from './storage.js';
 import { handleApi, PAYMENT_MODE } from './api.js';
 
@@ -64,6 +64,6 @@ const server = http.createServer(async (req, res) => {
 await ready();
 server.listen(PORT, () => {
   console.log(`Pati Çiftliği çalışıyor → http://localhost:${PORT}`);
-  console.log(`Veritabanı: ${process.env.DATABASE_URL || process.env.POSTGRES_URL ? 'Postgres (DATABASE_URL)' : 'yerel PGlite (data/pg)'}`);
+  console.log(`Veritabanı: ${DATABASE_URL_KEY ? `Postgres (${DATABASE_URL_KEY})` : 'yerel PGlite (data/pg)'}`);
   console.log(`Ödeme modu: ${PAYMENT_MODE}${PAYMENT_MODE === 'test' ? ' (tahsilat yapılmaz)' : ''}`);
 });

@@ -1,5 +1,5 @@
 import { randomBytes } from 'node:crypto';
-import { query, one, tx, balanceOf, ready, DEMO } from './db.js';
+import { query, one, tx, balanceOf, ready, DEMO, DATABASE_URL_KEY } from './db.js';
 import { storeImage, deleteImage, storageReady } from './storage.js';
 import { hashPassword, verifyPassword, newToken, sha256 } from './security.js';
 
@@ -188,7 +188,7 @@ route('GET', '/api/config', () => ({
 route('GET', '/api/health', async () => {
   const health = {
     database: 'ok',
-    databaseUrl: Boolean(process.env.DATABASE_URL || process.env.POSTGRES_URL),
+    databaseUrl: DATABASE_URL_KEY || 'tanımlı değil',
     photoStorage: storageReady() ? 'ok' : 'BLOB_READ_WRITE_TOKEN eksik',
     paymentMode: PAYMENT_MODE,
     adminFromEnv: Boolean(process.env.ADMIN_EMAIL && process.env.ADMIN_PASSWORD),

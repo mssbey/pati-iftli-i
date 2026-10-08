@@ -5,7 +5,11 @@ import { hashPassword } from './security.js';
 
 // Yayında DATABASE_URL (Neon / Vercel Postgres) kullanılır. Tanımlı değilse yerelde
 // data/pg klasöründe gömülü Postgres (PGlite) açılır; iki ortamda da SQL aynıdır.
-const DATABASE_URL = process.env.DATABASE_URL || process.env.POSTGRES_URL;
+// Vercel bağlarken değişkene önek ekleyebilir (ör. STORAGE_DATABASE_URL); bunlar da kabul edilir.
+const URL_KEYS = ['DATABASE_URL', 'POSTGRES_URL'];
+export const DATABASE_URL_KEY = URL_KEYS.find(k => process.env[k]) ||
+  Object.keys(process.env).sort().find(k => /_(DATABASE_URL|POSTGRES_URL)$/.test(k) && /^postgres(ql)?:\/\//.test(process.env[k])) || null;
+const DATABASE_URL = DATABASE_URL_KEY && process.env[DATABASE_URL_KEY];
 const PROD = process.env.NODE_ENV === 'production';
 export const DATA_DIR = process.env.DATA_DIR || join(import.meta.dirname, '..', 'data');
 // Giriş ekranında gösterilen herkese açık demo üye. Gerçek yayından önce DEMO_ACCOUNT=0 ile kapatın.
@@ -36,7 +40,7 @@ async function getDriver() {
       },
     };
   } else {
-    if (process.env.VERCEL) throw new Error('DATABASE_URL tanımlı değil. Vercel projesine bir Postgres (Neon) veritabanı bağlayın.');
+    if (process.env.VERCEL) throw new Error('DATABASE_URL tanımlı değil. Vercel projesinin Storage sekmesinden bir Neon (Postgres) veritabanı bağlayıp yeniden yayınlayın (Redeploy).');
     const { PGlite } = await import('@electric-sql/pglite');
     await mkdir(DATA_DIR, { recursive: true });
     const db = new PGlite(join(DATA_DIR, 'pg'));
