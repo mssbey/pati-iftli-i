@@ -4,9 +4,10 @@ Türkçe, mobil uyumlu köpek çiftliği ve ilan platformu: üyelik, kredi cüzd
 
 ## Çalıştırma
 
-Gereksinim: **Node.js 22.13+** (ek paket kurulumu yok; veri tabanı Node'un yerleşik `node:sqlite` modülü).
+Gereksinim: **Node.js 22+**.
 
 ```powershell
+npm install
 npm start
 ```
 
@@ -16,9 +17,12 @@ Geliştirirken `npm run dev` sunucuyu dosya değişikliklerinde yeniden başlat�
 
 ## Yapı
 
-- `server/index.js` — HTTP sunucusu, statik dosyalar (`dist/`), yüklenen fotoğraflar, güvenlik başlıkları (CSP vb.).
+- `server/index.js` — yerel geliştirme sunucusu: statik dosyalar (`dist/`), yüklenen fotoğraflar, API.
+- `api/index.js` — Vercel sunucusuz fonksiyonu; tüm `/api/*` isteklerini `server/api.js`'e iletir.
+- `vercel.json` — Vercel ayarları ve güvenlik başlıkları (CSP vb.; yerel sunucu da buradan okur).
 - `server/api.js` — JSON API: üyelik/oturum, ilanlar, kredi defteri, siparişler, rezervasyonlar, yönetim.
-- `server/db.js` — SQLite şeması ve örnek ilanlar. Veriler `data/` klasöründe (git dışı).
+- `server/db.js` — Postgres şeması, örnek ilanlar ve yönetici kurulumu. `DATABASE_URL` varsa ona bağlanır; yoksa yerelde gömülü Postgres (PGlite) ile `data/pg` klasörünü kullanır (git dışı).
+- `server/storage.js` — fotoğraflar: `BLOB_READ_WRITE_TOKEN` varsa Vercel Blob, yoksa `data/uploads`.
 - `dist/index.html`, `dist/styles.css`, `dist/app.js` — derleme gerektirmeyen ön yüz (hash tabanlı sayfalar: `#/giris`, `#/kayit`, `#/krediler`, `#/ilan-ver`, `#/ilan/:id`, `#/hesabim`, `#/yonetim`).
 
 ## Nasıl çalışır
@@ -34,6 +38,15 @@ Geliştirirken `npm run dev` sunucuyu dosya değişikliklerinde yeniden başlat�
 - Üyeler arası mesajlaşma (şimdilik talepler yöneticiye düşüyor), e-posta doğrulama ve şifre sıfırlama.
 - Gerçek çiftlik bilgileri, fotoğraflar, pedigree belgeleri, KVKK ve kullanım koşulları metinleri (proje sahibinden alınmalı).
 
-## Yayın
+## Vercel'e yayın
 
-Mevcut Sites yayını (`.openai/hosting.json`, https://pati-ciftligi-dunyasi.mss881.chatgpt.site) yalnızca statik dosya sunar; bu sürüm Node sunucusu gerektirir. Node çalıştırabilen bir sunucuya (VPS, Render, Railway, Fly.io vb.) kalıcı `data/` diskiyle kurun ve `NODE_ENV=production`, HTTPS arkasında `COOKIE_SECURE=1`, ters vekil sunucu varsa `TRUST_PROXY=1` ayarlayın.
+1. Vercel'de **Add New → Project** ile `mssbey/pati-iftli-i` reposunu içe aktarın. Framework: **Other**; derleme ayarlarını boş bırakın (`vercel.json` hazır).
+2. Proje içinde **Storage** sekmesinden:
+   - **Neon (Postgres)** veritabanı oluşturup projeye bağlayın → `DATABASE_URL` otomatik eklenir.
+   - **Blob** deposu oluşturup bağlayın → `BLOB_READ_WRITE_TOKEN` otomatik eklenir.
+3. **Settings → Environment Variables** bölümüne ekleyin:
+   - `ADMIN_EMAIL`, `ADMIN_PASSWORD` — yönetici hesabı (güçlü bir şifre seçin).
+   - `PAYMENT_PROVIDER=test` — gerçek ödeme bağlanana kadar kredi alımını test modunda açmak için. Eklenmezse satış kapalı kalır.
+4. **Redeploy**. Tablolar ve örnek ilanlar ilk API isteğinde otomatik oluşturulur.
+
+Not: Giriş denemesi sınırlaması bellek içidir; sunucusuz ortamda her örnek için ayrı sayılır.

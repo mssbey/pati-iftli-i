@@ -6,8 +6,8 @@
 
 ## Mevcut uygulama
 
-- Bağımlılıksız Node.js sunucusu (`server/`, yerleşik `node:sqlite`) + buildless ön yüz (`dist/index.html`, `dist/styles.css`, `dist/app.js`). Ayrıntılar README'de.
-- Doğal yeşil, krem ve açık limon tonları; Manrope/DM Sans fontları; SVG ikon seti `index.html` içindeki sprite'ta.
+- Node.js API (`server/`, Postgres: yayında Neon `DATABASE_URL`, yerelde PGlite) + Vercel fonksiyonu `api/index.js` + buildless ön yüz (`dist/index.html`, `dist/styles.css`, `dist/app.js`). Ayrıntılar README'de.
+- Canlı palet: mor (ana), güneş sarısı ve mercan vurgular, sıcak krem zemin (yeşil istenmiyor); Manrope/DM Sans fontları; SVG ikon seti `index.html` içindeki sprite'ta.
 - Çalışan: üyelik/oturum, rol (user/admin), kredi defteri (idempotent `ref`), ilan oluşturma (fotoğraf yüklemeli) ve öne çıkarma, yönetici onay/ret (ret kredi iadesi), rezervasyon talepleri, yönetim paneli (günlük satış, kullanıcılar, talepler, bekleyen ilanlar).
 - Kredi satın alma giriş gerektirir; ödeme yalnızca `test` modunda (tahsilat yok). Gerçek sağlayıcı yok.
 - Ön yüzde kullanıcı verisi her zaman `esc()` ile kaçırılarak HTML'e yazılır.
@@ -28,7 +28,7 @@
 
 - Yerel çalıştırma: `npm start` → http://localhost:3000 (statik `http.server` artık yetmez; API gerekir). Kontrol: `npm run check`.
 - Dosyalar UTF-8. `repair.py` ilk yayındaki bir kodlama hatası için tek seferlik kullanıldı; tekrar çalıştırma.
-- `.openai/hosting.json` mevcut Sites kimliğini içerir. Başka hosting seçilirse ilgili dağıtım yapılandırması ayrıca hazırlanmalı.
+- Yayın hedefi Vercel (`vercel.json`; repo github.com/mssbey/pati-iftli-i). `.openai/hosting.json` eski statik Sites yayınına ait.
 - Gerçek servisler bağlanana kadar demo açıklamalarını ve örnek içerik etiketlerini koru.
 - Gerçek çiftlik bilgileri, belge ve referansları uydurma. Gerekli bilgileri proje sahibinden al.
 - Yayın yardımcılarını günlük uygulama kaynakları olarak değerlendirme.
