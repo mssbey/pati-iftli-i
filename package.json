@@ -1,0 +1,13 @@
+{
+  "name": "pati-ciftligi",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Pati Çiftliği: tanıtım, ilan ve kredi platformu",
+  "engines": { "node": ">=22.13" },
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning --env-file-if-exists=.env server/index.js",
+    "dev": "node --disable-warning=ExperimentalWarning --env-file-if-exists=.env --watch server/index.js",
+    "check": "node --check dist/app.js && node --check server/index.js && node --check server/api.js && node --check server/db.js"
+  }
+}

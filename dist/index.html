@@ -1,3 +1,295 @@
-<!DOCTYPE html><html lang="tr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pati Çiftliği — Bir dostla başlar</title><meta name="description" content="Pati Çiftliği tasarım demosu. Çiftlik, sahiplendirme ilanları ve evcil hayvan rehberi."><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><style>
-:root{--green:#264f3c;--lime:#d8eaa7;--paper:#faf9f5;--ink:#253c30;--muted:#7a8179}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:15px 'DM Sans',sans-serif}button,input,select,textarea{font:inherit}button,a{ -webkit-tap-highlight-color:transparent}button{cursor:pointer}a{color:inherit;text-decoration:none}button:focus-visible,a:focus-visible{outline:3px solid #9cba69;outline-offset:4px}.wrap{max-width:1240px;margin:auto;padding:0 36px}.top{background:var(--green);color:#e8efdf;text-align:center;padding:10px;font-size:12px;letter-spacing:.4px}.top span{color:var(--lime)}header{height:96px;display:flex;align-items:center;justify-content:space-between;gap:25px}.logo{display:flex;align-items:center;gap:10px;font-family:Manrope;font-size:23px;font-weight:800;letter-spacing:-1px}.paw{background:var(--green);color:var(--lime);border-radius:14px;display:grid;place-items:center;width:43px;height:43px;font-size:24px}.logo small{display:block;font-size:9px;letter-spacing:3px;font-weight:600;margin-top:2px}nav{display:flex;gap:27px;font-size:13px}nav a:hover{color:#789447}.actions{display:flex;gap:20px;align-items:center;font-size:13px}.btn{border:0;background:var(--green);color:white;border-radius:8px;padding:14px 20px;font-weight:600;display:inline-flex;gap:12px;align-items:center;justify-content:center}.btn.light{background:var(--lime);color:var(--ink)}.btn.outline{border:1px solid #d0d6cc;background:transparent;color:var(--ink)}.hero{position:relative;min-height:520px;border-radius:20px;overflow:hidden;background:#d8dfd0;display:flex;align-items:center}.hero img{position:absolute;width:100%;height:100%;object-fit:cover;object-position:center 47%}.hero:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgba(16,42,26,.84),rgba(20,40,25,.4) 52%,transparent 82%)}.hero-content{position:relative;z-index:1;color:white;padding:55px;width:65%}.eyebrow{font-size:11px;font-weight:700;letter-spacing:2px;display:flex;align-items:center;gap:9px}.eyebrow:before{content:'';width:7px;height:7px;border-radius:50%;background:#b9d87c}h1{font:500 59px/1.12 Manrope;letter-spacing:-2.5px;margin:22px 0}h1 em{font-style:normal;color:var(--lime)}.hero p{color:#e1e6dc;line-height:1.8;font-size:15px;max-width:390px;margin-bottom:27px}.hero-buttons{display:flex;gap:12px}.hero .outline{color:white;border-color:#ffffff50}.hero-note{font-size:11px;margin-top:32px;color:#d7e2d2;display:flex;gap:12px}.float-note{z-index:1;position:absolute;right:25px;bottom:25px;color:white;backdrop-filter:blur(15px);background:#ffffff18;border:1px solid #ffffff45;border-radius:12px;padding:16px;display:flex;gap:12px;align-items:center}.float-note strong{display:block;font-size:13px}.float-note small{font-size:10px;color:#e8eade}.search{position:relative;z-index:2;background:white;box-shadow:0 9px 30px #233c3010;border:1px solid #e8e9e2;margin:-1px 25px 0;padding:20px 25px;border-radius:0 0 13px 13px;display:flex;align-items:center;gap:24px}.search label{display:block;font-size:10px;color:var(--muted);margin-bottom:6px}.search .field{flex:1;border-right:1px solid #e7e8df}.search select,.search input{border:0;background:transparent;color:var(--ink);width:90%;outline:none;font-weight:600;font-size:13px}.benefits{display:flex;justify-content:space-between;padding:29px 35px;margin-bottom:32px;border-bottom:1px solid #e3e5dd;font-size:12px;color:#687368}.benefits b{color:var(--green);margin-right:10px;font-size:17px}.section{padding:25px 0 40px}.section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:24px}.kicker{font-size:10px;letter-spacing:2px;font-weight:700;color:#7e906b}h2{font:600 31px Manrope;letter-spacing:-1px;margin:10px 0}.sub{color:var(--muted);font-size:13px;line-height:1.7;margin:0}.textlink{font-size:12px;font-weight:700;display:inline-flex;gap:20px;align-items:center}.tabs{display:flex;gap:9px;margin-bottom:25px;flex-wrap:wrap}.tab{border:1px solid #e1e5db;background:transparent;border-radius:7px;color:#6c776d;padding:10px 18px;font-size:12px}.tab.active{background:var(--green);color:white;border-color:var(--green)}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}.card{background:white;border:1px solid #e6e7df;border-radius:12px;overflow:hidden}.photo{height:225px;position:relative;background:#e6e8df}.photo img{width:100%;height:100%;object-fit:cover;transition:transform .3s}.card:hover img{transform:scale(1.035)}.badge{position:absolute;top:14px;left:14px;border-radius:5px;padding:6px 9px;font-size:9px;font-weight:700;background:#fafaf1;color:var(--green)}.badge.gold{background:#f1e8c8;color:#7a6026}.heart{position:absolute;right:12px;top:12px;width:31px;height:31px;border:0;border-radius:50%;background:white;font-size:20px;color:#586556}.heart.saved{color:#c15b47;background:#ffefec}.card-body{padding:18px}.meta{font-size:10px;color:#8a9185;display:flex;justify-content:space-between}.card h3{font:700 17px Manrope;margin:10px 0}.chips{display:flex;gap:6px}.chips span{font-size:10px;background:#f3f5ef;padding:5px 7px;border-radius:4px;color:#7b8377}.card-foot{border-top:1px solid #eef0e8;margin-top:17px;padding-top:13px;display:flex;justify-content:space-between;align-items:center;font-size:10px;color:#889082}.card-foot b{font-size:11px;color:var(--green)}.farm{display:grid;grid-template-columns:1.05fr 1fr;background:#edf0e5;border-radius:18px;overflow:hidden;margin:25px 0 35px}.farm-image{position:relative;min-height:370px}.farm-image img{width:100%;height:100%;object-fit:cover;position:absolute}.farm-stamp{position:absolute;bottom:25px;left:25px;background:#faf9ef;padding:15px 20px;border-radius:10px;font-size:12px;display:flex;gap:13px;align-items:center}.farm-content{padding:43px}.farm-content h2{font-size:34px;line-height:1.3}.farm-content p{font-size:13px;line-height:1.8;color:#74806d}.checks{display:grid;grid-template-columns:1fr 1fr;gap:15px;font-size:11px;margin:24px 0}.checks span:before{content:'✓';margin-right:8px;color:#78904e}.guide-grid{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:20px}.guide{border:1px solid #e5e7dc;border-radius:12px;overflow:hidden;background:white}.guide img{height:175px;width:100%;object-fit:cover}.guide-content{padding:21px}.guide h3{font:700 18px/1.5 Manrope;margin:10px 0}.guide p{font-size:12px;color:var(--muted);line-height:1.7}.vaccine{background:#e9eddd;padding:25px;display:flex;flex-direction:column;justify-content:space-between}.vaccine .icon{font-size:35px}.vaccine h3{font-size:23px}.vaccine .btn{align-self:start;padding:11px 16px;font-size:11px}.credit-banner{margin:30px 0 55px;background:var(--green);color:white;border-radius:15px;padding:32px 40px;display:flex;gap:25px;align-items:center;justify-content:space-between}.credit-banner h2{font-size:25px;margin:0 0 8px}.credit-banner p{font-size:12px;color:#c5d4c4;margin:0}.coin{font-size:35px;background:#ffffff15;padding:15px;border-radius:14px}.banner-copy{flex:1}footer{border-top:1px solid #e1e5d9;padding:34px 0 20px}footer .row{display:flex;justify-content:space-between;align-items:center}footer p{font-size:11px;color:var(--muted)}.footer-links{display:flex;gap:24px;font-size:11px}.legal{display:flex;justify-content:space-between;border-top:1px solid #e5e7dd;margin-top:25px;padding-top:17px;font-size:10px;color:#949b8d}dialog{border:0;border-radius:17px;padding:30px;max-width:620px;width:calc(100% - 30px);color:var(--ink);background:var(--paper)}dialog::backdrop{background:#172a22a0;backdrop-filter:blur(5px)}.close{float:right;border:0;background:#e9ede1;border-radius:50%;width:30px;height:30px}.modal-content h2{font-size:26px}.modal-content input,.modal-content select,.modal-content textarea{width:100%;padding:12px;border:1px solid #dbe0d2;background:white;border-radius:7px;margin:6px 0 13px}.modal-content label{font-size:12px}.modal-content p{font-size:13px;line-height:1.8;color:#6b7868}.packages{display:flex;gap:12px}.package{flex:1;border:1px solid #d4dbc8;border-radius:10px;padding:20px 10px;background:white;text-align:center}.package b{display:block;font-size:24px}.package span{display:block;margin:10px}.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--green);color:white;z-index:10;padding:16px 24px;border-radius:10px;box-shadow:0 8px 30px #0002;font-size:13px}.empty{grid-column:1/-1;padding:40px;text-align:center}.demo-tag{font-size:9px;background:#e6ebdc;padding:3px 6px;border-radius:4px;margin-left:8px;letter-spacing:0}.dashboard{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.dashboard div{background:#edf0e4;padding:17px;border-radius:8px;font-size:11px}.dashboard b{display:block;font-size:24px;margin-top:8px}@media(min-width:1500px){.wrap{max-width:1370px}.hero{min-height:580px}.photo{height:250px}}@media(max-width:1050px){nav{gap:15px}.actions>a{display:none}.hero-content{width:80%}.grid{grid-template-columns:repeat(2,1fr)}.photo{height:280px}.hero h1{font-size:50px}.benefits{padding:25px 0}.farm-content{padding:30px}.guide-grid{grid-template-columns:repeat(3,1fr)}}@media(max-width:700px){.wrap{padding:0 18px}.top{font-size:10px}header{height:80px}.logo{font-size:19px}.logo small{font-size:7px}nav{display:none}.actions .btn{padding:11px;font-size:11px}.hero{min-height:530px}.hero img{object-position:65%}.hero:after{background:linear-gradient(90deg,#132e23d9,#132e2360)}.hero-content{padding:30px 24px;width:100%}h1,.hero h1{font-size:43px;letter-spacing:-2px}.hero p{max-width:290px;font-size:13px}.hero-buttons .btn{font-size:11px;padding:13px}.float-note{display:none}.search{margin:0;padding:18px;gap:12px;flex-wrap:wrap}.search .field{flex-basis:40%;border:0}.search .btn{width:100%;font-size:12px}.benefits{display:grid;grid-template-columns:1fr 1fr;gap:20px;font-size:10px;margin-bottom:10px}.section-head{gap:12px}.section-head h2{font-size:25px}.section-head .textlink{font-size:10px;gap:6px}.sub{font-size:11px}.tab{font-size:10px;padding:9px 12px}.grid{gap:12px}.photo{height:185px}.card-body{padding:12px}.card h3{font-size:15px}.meta{font-size:8px}.chips{gap:3px}.chips span{font-size:8px;padding:4px}.card-foot{font-size:8px;gap:3px}.card-foot b{font-size:9px}.farm{grid-template-columns:1fr}.farm-image{min-height:280px}.farm-content{padding:27px}.farm-content h2{font-size:28px}.guide-grid{grid-template-columns:1fr}.guide img{height:210px}.vaccine{min-height:260px}.credit-banner{padding:25px;flex-wrap:wrap;gap:15px}.coin{display:none}.credit-banner h2{font-size:23px}.credit-banner .btn{font-size:12px}.footer-links{gap:12px;flex-wrap:wrap}footer .row{display:block}.legal{gap:20px;line-height:1.7}.packages{gap:6px}.package{padding:15px 6px}.package b{font-size:19px}.package .btn{font-size:10px;padding:10px}.dashboard{grid-template-columns:1fr 1fr}}
-</style></head><body><div class="top">Küçük patiler, büyük mutluluklar. <span>Yeni dostunuzla tanışın ↗</span></div><div class="wrap"><header><a class="logo" href="#"><span class="paw">♣</span><span>pati çiftliği<small>SEVGİYLE BÜYÜYEN BİR DÜNYA</small></span></a><nav><a href="#farm">Çiftliğimiz</a><a href="#listings">Dostunu bul</a><a href="#guide">Pati rehberi</a><a href="#credits">Kredi paketleri</a></nav><div class="actions"><a href="#" data-action="profile">♙ Giriş yap</a><button class="btn" data-action="listing">＋ İlan ver</button></div></header><main><section class="hero"><img src="https://images.unsplash.com/photo-1633722715463-d30f4f325e24?auto=format&fit=crop&w=1800&q=85" alt="Doğada mutlu bir golden retriever"><div class="hero-content"><div class="eyebrow">BİR YUVADAN ÇOK DAHA FAZLASI</div><h1>Her güzel hikâye,<br>bir <em>dostla</em> başlar.</h1><p>Sevgiyle büyüyen patiler, güvenle kurulan bağlar.<br>Çiftliğimizi keşfedin, hayatınıza neşe katacak<br>yeni dostunuzla tanışın.</p><div class="hero-buttons"><a href="#listings" class="btn light">Dostumu bul <span>↗</span></a><a href="#farm" class="btn outline">Çiftliğimizi keşfet →</a></div><div class="hero-note"><span>♡ Sevgi dolu bir başlangıç</span><span>•</span><span>Sorumlu sahiplendirme</span></div></div><div class="float-note"><span style="font-size:26px">♧</span><div><strong>Doğanın içinde, sevgiyle.</strong><small>Patilerin mutluluğu için tasarlandı.</small></div></div></section><form class="search" id="search"><div class="field"><label>NASIL BİR DOST ARIYORSUNUZ?</label><select id="animal"><option value="all">Tüm dostlar</option value="dog">Köpek</option><option value="cat">Kedi</option></select></div><div class="field"><label>IRK</label><select id="breed"><option value="all">Tüm ırklar</option><option>Golden Retriever</option><option>Border Collie</option><option>British Shorthair</option><option>Pomeranian</option></select></div><div class="field"><label>ŞEHİR</label><select id="city"><option value="all">Tüm Türkiye</option><option>İstanbul</option><option>Ankara</option><option>İzmir</option></select></div><button class="btn" type="submit">⌕ Dostları keşfet</button></form><div class="benefits"><span><b>♧</b> Hayvan refahını önemsiyoruz</span><span><b>✓</b> Yönetici onaylı ilanlar</span><span><b>♡</b> Sorumlu sahiplendirme</span><span><b>⌘</b> Bilgili, bilinçli pati aileleri</span></div><section class="section" id="listings"><div class="section-head"><div><div class="kicker">YENİ BİR BAĞ, YENİ BİR HİKÂYE</div><h2>Bir dost sizi bekliyor.</h2><p class="sub">Belki de aradığınız mutluluk, bu küçük patilerden birinde.</p></div><button class="textlink" style="border:0;background:none" id="all-listings">Tüm ilanları gör <span>↗</span></button></div><div class="tabs"><button class="tab active" data-category="all">Tüm ilanlar</button><button class="tab" data-category="adoption">♡ Sahiplendirme</button><button class="tab" data-category="mate">⚭ Eş bulma</button><button class="tab" data-category="lost">⌕ Kayıp dostlar</button><button class="tab" data-category="accessory">♧ Mama & aksesuar</button></div><div class="grid" id="cards"></div><p style="font-size:10px;color:#8b9383;margin-top:16px">İlanlar ve çiftlik içerikleri tasarımı göstermek için hazırlanmış örneklerdir.</p></section><section class="farm" id="farm"><div class="farm-image"><img loading="lazy" src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=1000&q=85" alt="Çiftliğin doğal yaşamını temsil eden köpek fotoğrafı"><div class="farm-stamp"><span style="font-size:28px;color:#638144">♧</span><div><strong>Mutlu patiler, huzurlu yaşam.</strong><br><small>Her dostumuz ailenin bir parçası.</small></div></div></div><div class="farm-content"><div class="kicker">PATİ ÇİFTLİĞİ'NE HOŞ GELDİNİZ</div><h2>Onlar için bir çiftlik.<br>Sizin için bir aile.</h2><p>Doğayla iç içe, her patinin kendini evinde hissettiği bir yaşam hayal ediyoruz. Çiftliğimizin yaşam alanlarını, bakım yaklaşımını ve damızlık dostlarımızı yakından tanıyın.</p><div class="checks"><span>Ferah yaşam alanları</span><span>Bakım & hijyen yaklaşımı</span><span>Şecere ve soy bilgileri</span><span>Bilinçli sahiplendirme</span></div><button class="btn" data-action="farm">Çiftliğimizi yakından tanıyın ↗</button></div></section><section class="section" id="guide"><div class="section-head"><div><div class="kicker">SEVGİ, BİLGİYLE BÜYÜR</div><h2>Dostunuz için küçük bir rehber.</h2><p class="sub">Daha sağlıklı, daha mutlu bir yaşam için birlikte öğrenelim.</p></div><button class="textlink" style="border:0;background:none" data-action="library">Rehberi keşfet ↗</button></div><div class="guide-grid"><article class="guide"><img loading="lazy" src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=800&q=80" alt="Küçük bir köpek"><div class="guide-content"><div class="kicker">IRK REHBERİ · 5 DK OKUMA</div><h3>Hangi dost sizin yaşamınıza uyum sağlar?</h3><p>Karakteri, bakım ihtiyaçları ve yaşam alanıyla ırkları yakından tanıyın.</p><button class="textlink" style="border:0;background:none;padding:0" data-action="breeds">Irkları keşfet →</button></div></article><article class="guide vaccine"><div><div class="icon">✚</div><div class="kicker" style="margin-top:18px">SAĞLIKLI BİR BAŞLANGIÇ</div><h3>Küçük bir hatırlatma,<br>büyük bir koruma.</h3><p>Dostunuzun yaşına göre aşı rehberini inceleyin.</p></div><button class="btn" data-action="vaccine">Aşı rehberini aç ↗</button></article><article class="guide"><img loading="lazy" src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=800&q=80" alt="Birlikte oynayan iki köpek"><div class="guide-content"><div class="kicker">EĞİTİM & YAŞAM · 4 DK OKUMA</div><h3>Birlikte öğrenin.<br>Bağınızı güçlendirin.</h3><p>İlk günden itibaren güven ve sabırla kurulan bir iletişim.</p><button class="textlink" style="border:0;background:none;padding:0" data-action="training">Yazıyı oku →</button></div></article></div></section><section class="credit-banner" id="credits"><div class="coin">◉</div><div class="banner-copy"><h2>Dostunuzun hikâyesini daha çok kişi görsün.</h2><p>Kredi paketlerini keşfedin, ilanınızı oluşturun veya vitrinde öne çıkarın.</p></div><button class="btn light" data-action="credits">Kredi paketlerini incele ↗</button></section></main><footer><div class="row"><div><a class="logo" href="#"><span class="paw">♣</span><span>pati çiftliği</span></a><p>Sevgiyle büyüyen, güvenle buluşan patiler.</p></div><div class="footer-links"><a href="#farm">Çiftliğimiz</a><a href="#listings">İlanlar</a><a href="#guide">Pati rehberi</a><a href="#" data-action="contact">İletişim</a><a href="#" data-action="admin">Yönetim demosu</a></div></div><div class="legal"><span>© 2026 Pati Çiftliği · Tasarım ve etkileşim demosu</span><span><a href="#" data-action="privacy">Gizlilik</a> · <a href="#" data-action="terms">Kullanım koşulları</a></span></div></footer></div><dialog id="modal"><button class="close" aria-label="Kapat">×</button><div class="modal-content" id="modal-content"></div></dialog><script src="app.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pati Çiftliği — Her güzel hikâye bir dostla başlar</title>
+<meta name="description" content="Pati Çiftliği: sorumlu sahiplendirme, eş bulma, kayıp dost ve mama paylaşım ilanları; ırk rehberi, sağlık ve eğitim içerikleri.">
+<meta name="theme-color" content="#5b2ee6">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%235b2ee6'/%3E%3Cg fill='%23ffd43b'%3E%3Cellipse cx='12' cy='15.5' rx='4' ry='3.3'/%3E%3Cellipse cx='6.8' cy='10.8' rx='1.7' ry='2.1'/%3E%3Cellipse cx='17.2' cy='10.8' rx='1.7' ry='2.1'/%3E%3Cellipse cx='9.7' cy='7.3' rx='1.7' ry='2.2'/%3E%3Cellipse cx='14.3' cy='7.3' rx='1.7' ry='2.2'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-paw" viewBox="0 0 24 24"><g fill="currentColor" stroke="none"><ellipse cx="12" cy="15.6" rx="4.4" ry="3.7"/><ellipse cx="6.2" cy="10.6" rx="1.9" ry="2.4"/><ellipse cx="17.8" cy="10.6" rx="1.9" ry="2.4"/><ellipse cx="9.4" cy="6.4" rx="1.9" ry="2.5"/><ellipse cx="14.6" cy="6.4" rx="1.9" ry="2.5"/></g></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.2a4.3 4.3 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-5.7-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 15.3 12 21 12 21z"/><circle cx="12" cy="9.8" r="2.3"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 5 6v5.6c0 4.4 3 7.8 7 9.4 4-1.6 7-5 7-9.4V6z"/><path d="m9 12 2.2 2.2L15.5 10"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3.5 2.6 5.4 5.9.8-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.8z"/></symbol>
+  <symbol id="i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M14.8 9.2a3.2 3.2 0 1 0 0 5.6"/><path d="M8 11h4.5M8 13h4.5"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.8"/><path d="M4.5 20.5c1.4-3.7 4.3-5.6 7.5-5.6s6.1 1.9 7.5 5.6"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M8.5 7H17v8.5"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 19.5C5 11 10 5 19.5 4.5 19.5 14 14 19.5 5.5 19.5"/><path d="M5 19.5 13 11.5"/></symbol>
+  <symbol id="i-med" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><path d="M12 8v8M8 12h8"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M5 4.5h11.5a2 2 0 0 1 2 2V19.5H7a2 2 0 0 1-2-2z"/><path d="M5 17.5a2 2 0 0 1 2-2h11.5M9 8.5h6"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M8 3v4M16 3v4M3.5 10h17"/></symbol>
+  <symbol id="i-logout" viewBox="0 0 24 24"><path d="M14 4.5h3.5a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H14M10 8l-4 4 4 4M6 12h9.5"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 8.5h3.2l1.8-3h6l1.8 3H20v10.5H4z"/><circle cx="12" cy="13.5" r="3.3"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3.5c.6 4.6 2.5 6.6 7.5 7.5-5 .9-6.9 2.9-7.5 7.5-.6-4.6-2.5-6.6-7.5-7.5 5-.9 6.9-2.9 7.5-7.5z"/></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4.5 5.5h15v10.5H10l-5.5 4z"/><path d="M8.5 9.5h7M8.5 12.5h4"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="9.5" rx="2.5"/><path d="M8.3 10.5V7.8a3.7 3.7 0 0 1 7.4 0v2.7"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="2.5"/><path d="m4.5 7.5 7.5 5.5 7.5-5.5"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M4.5 10.5 12 4l7.5 6.5V20h-15z"/><path d="M10 20v-5h4v5"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M5 7h14M10 7V4.5h4V7M7 7l1 13h8l1-13"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24"><circle cx="17.5" cy="6" r="2.5"/><circle cx="6.5" cy="12" r="2.5"/><circle cx="17.5" cy="18" r="2.5"/><path d="m8.7 10.8 6.6-3.6M8.7 13.2l6.6 3.6"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 3 5 13.5h6L10 21l8-10.5h-6z"/></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+</svg>
+
+<div class="announce"><span class="dot"></span> Küçük patiler, büyük mutluluklar. <a href="#ilanlar">Yeni dostlarla tanışın <svg class="ic"><use href="#i-arrow"/></svg></a></div>
+
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="logo" href="#/" aria-label="Pati Çiftliği ana sayfa">
+      <span class="logo-mark"><svg class="ic"><use href="#i-paw"/></svg></span>
+      <span class="logo-text">pati çiftliği<small>SEVGİYLE BÜYÜYEN BİR DÜNYA</small></span>
+    </a>
+    <nav class="main-nav" id="main-nav" aria-label="Ana menü">
+      <a href="#ciftlik">Çiftliğimiz</a>
+      <a href="#ilanlar">İlanlar</a>
+      <a href="#irklar">Irk rehberi</a>
+      <a href="#saglik">Sağlık &amp; eğitim</a>
+      <a href="#krediler">Krediler</a>
+    </nav>
+    <div class="header-actions" id="header-actions">
+      <a class="btn ghost sm" href="#/giris">Giriş yap</a>
+      <a class="btn sm" href="#/ilan-ver"><svg class="ic"><use href="#i-plus"/></svg> İlan ver</a>
+    </div>
+    <button class="icon-btn menu-toggle" id="menu-toggle" aria-label="Menüyü aç" aria-expanded="false"><svg class="ic"><use href="#i-menu"/></svg></button>
+  </div>
+</header>
+
+<main id="home" class="view">
+  <div class="wrap">
+    <section class="hero">
+      <img src="https://images.unsplash.com/photo-1633722715463-d30f4f325e24?auto=format&fit=crop&w=1900&q=85" alt="Doğada mutlu bir golden retriever" fetchpriority="high">
+      <div class="hero-content">
+        <div class="eyebrow light">BİR YUVADAN ÇOK DAHA FAZLASI</div>
+        <h1>Her güzel hikâye,<br>bir <em>dostla</em> başlar.</h1>
+        <p>Sevgiyle büyüyen patiler, güvenle kurulan bağlar. Çiftliğimizi keşfedin, hayatınıza neşe katacak yeni dostunuzla tanışın.</p>
+        <div class="hero-buttons">
+          <a href="#ilanlar" class="btn lime lg">Dostumu bul <svg class="ic"><use href="#i-arrow"/></svg></a>
+          <a href="#ciftlik" class="btn glass lg">Çiftliğimizi keşfet</a>
+        </div>
+        <div class="hero-stats">
+          <div><b id="stat-total">—</b><span>yayındaki ilan</span></div>
+          <div><b id="stat-cities">—</b><span>şehir</span></div>
+          <div><b>%100</b><span>yönetici onaylı</span></div>
+        </div>
+      </div>
+      <div class="hero-card">
+        <span class="hero-card-icon"><svg class="ic"><use href="#i-shield"/></svg></span>
+        <div><strong>Onaylı ilan sistemi</strong><small>Her ilan yayından önce incelenir.</small></div>
+      </div>
+    </section>
+
+    <form class="search-bar" id="search" role="search">
+      <label class="field grow"><span>ARAMA</span>
+        <span class="field-input"><svg class="ic"><use href="#i-search"/></svg><input id="f-q" type="search" placeholder="Irk, şehir ya da isim…" autocomplete="off"></span>
+      </label>
+      <label class="field"><span>TÜR</span>
+        <select id="f-animal"><option value="all">Tüm dostlar</option><option value="dog">Köpek</option><option value="cat">Kedi</option><option value="other">Diğer</option></select>
+      </label>
+      <label class="field"><span>IRK</span><select id="f-breed"><option value="all">Tüm ırklar</option></select></label>
+      <label class="field"><span>ŞEHİR</span><select id="f-city"><option value="all">Tüm Türkiye</option></select></label>
+      <button class="btn lg" type="submit"><svg class="ic"><use href="#i-search"/></svg> Dostları keşfet</button>
+    </form>
+
+    <div class="trust">
+      <div><span class="trust-icon"><svg class="ic"><use href="#i-leaf"/></svg></span><p><b>Hayvan refahı önce</b>Sağlık ve yaşam koşulları önceliğimiz.</p></div>
+      <div><span class="trust-icon"><svg class="ic"><use href="#i-shield"/></svg></span><p><b>Onaylı ilanlar</b>Her ilan yayından önce incelenir.</p></div>
+      <div><span class="trust-icon"><svg class="ic"><use href="#i-heart"/></svg></span><p><b>Sorumlu sahiplendirme</b>Doğru dost, doğru yuva.</p></div>
+      <div><span class="trust-icon"><svg class="ic"><use href="#i-lock"/></svg></span><p><b>Güvenli hesap</b>Krediler hesabınızda, kayıt altında.</p></div>
+    </div>
+
+    <section class="section" id="kategoriler">
+      <div class="cat-tiles">
+        <button class="cat-tile" data-cat="adoption"><span class="cat-icon"><svg class="ic"><use href="#i-heart"/></svg></span><b>Sahiplendirme</b><small><span data-count="adoption">0</span> ilan</small><svg class="ic go"><use href="#i-arrow"/></svg></button>
+        <button class="cat-tile" data-cat="mate"><span class="cat-icon"><svg class="ic"><use href="#i-spark"/></svg></span><b>Eş bulma</b><small><span data-count="mate">0</span> ilan</small><svg class="ic go"><use href="#i-arrow"/></svg></button>
+        <button class="cat-tile" data-cat="lost"><span class="cat-icon"><svg class="ic"><use href="#i-search"/></svg></span><b>Kayıp dostlar</b><small><span data-count="lost">0</span> ilan</small><svg class="ic go"><use href="#i-arrow"/></svg></button>
+        <button class="cat-tile" data-cat="accessory"><span class="cat-icon"><svg class="ic"><use href="#i-leaf"/></svg></span><b>Mama &amp; aksesuar</b><small><span data-count="accessory">0</span> ilan</small><svg class="ic go"><use href="#i-arrow"/></svg></button>
+      </div>
+    </section>
+
+    <section class="section" id="ilanlar">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">YENİ BİR BAĞ, YENİ BİR HİKÂYE</div>
+          <h2>Bir dost sizi bekliyor.</h2>
+          <p class="sub">Vitrindeki ilanlar en üstte. Kategoriye göre süzün, detayına göz atın.</p>
+        </div>
+        <a class="btn outline" href="#/ilan-ver"><svg class="ic"><use href="#i-plus"/></svg> Ücretsiz hesapla ilan ver</a>
+      </div>
+      <div class="tabs" role="tablist">
+        <button class="tab active" data-category="all">Tümü</button>
+        <button class="tab" data-category="adoption">Sahiplendirme</button>
+        <button class="tab" data-category="mate">Eş bulma</button>
+        <button class="tab" data-category="lost">Kayıp dostlar</button>
+        <button class="tab" data-category="accessory">Mama &amp; aksesuar</button>
+        <button class="tab fav-tab" data-category="favorites"><svg class="ic"><use href="#i-heart"/></svg> Favorilerim</button>
+      </div>
+      <div class="grid" id="cards" aria-live="polite"></div>
+      <p class="fine">“Örnek ilan” etiketli kayıtlar ve çiftlik içerikleri tasarımı göstermek için hazırlanmıştır.</p>
+    </section>
+
+    <section class="section steps-section">
+      <div class="section-head center">
+        <div>
+          <div class="eyebrow">NASIL ÇALIŞIR?</div>
+          <h2>Dört adımda ilanınız yayında.</h2>
+        </div>
+      </div>
+      <ol class="steps">
+        <li><span class="step-no">01</span><svg class="ic"><use href="#i-user"/></svg><b>Hesap oluşturun</b><p>E-posta ile saniyeler içinde ücretsiz üye olun.</p></li>
+        <li><span class="step-no">02</span><svg class="ic"><use href="#i-coin"/></svg><b>Kredi yükleyin</b><p>Size uygun paketi seçin; krediler hesabınıza tanımlanır.</p></li>
+        <li><span class="step-no">03</span><svg class="ic"><use href="#i-camera"/></svg><b>İlanınızı oluşturun</b><p>Fotoğraf ve detayları ekleyin, onaya gönderin.</p></li>
+        <li><span class="step-no">04</span><svg class="ic"><use href="#i-bolt"/></svg><b>Öne çıkarın</b><p>Onaylanan ilanınızı vitrine taşıyarak daha çok kişiye ulaşın.</p></li>
+      </ol>
+    </section>
+
+    <section class="farm" id="ciftlik">
+      <div class="farm-media">
+        <img class="m1" loading="lazy" src="https://images.unsplash.com/photo-1558788353-f76d92427f16?auto=format&fit=crop&w=1000&q=80" alt="Çimenlerde dinlenen köpek">
+        <img class="m2" loading="lazy" src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=700&q=80" alt="Birlikte oynayan iki köpek">
+        <img class="m3" loading="lazy" src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=700&q=80" alt="Küçük bir köpek">
+        <div class="farm-stamp"><svg class="ic"><use href="#i-leaf"/></svg><div><strong>Mutlu patiler, huzurlu yaşam.</strong><small>Görseller temsilidir.</small></div></div>
+      </div>
+      <div class="farm-content">
+        <div class="eyebrow">PATİ ÇİFTLİĞİ'NE HOŞ GELDİNİZ</div>
+        <h2>Onlar için bir çiftlik.<br>Sizin için bir aile.</h2>
+        <p>Doğayla iç içe, her patinin kendini evinde hissettiği bir yaşam hayal ediyoruz. Yaşam alanlarımızı, bakım yaklaşımımızı ve damızlık dostlarımızı yakından tanımanız için kapılarımız randevuyla açık.</p>
+        <ul class="checks">
+          <li><svg class="ic"><use href="#i-check"/></svg>Ferah yaşam alanları</li>
+          <li><svg class="ic"><use href="#i-check"/></svg>Bakım &amp; hijyen yaklaşımı</li>
+          <li><svg class="ic"><use href="#i-check"/></svg>Şecere ve soy bilgileri</li>
+          <li><svg class="ic"><use href="#i-check"/></svg>Bilinçli sahiplendirme</li>
+        </ul>
+        <div class="farm-note"><svg class="ic"><use href="#i-book"/></svg><span>Gerçek çiftlik fotoğrafları, hijyen politikası ve doğrulanmış şecere kayıtları eklenecek.</span></div>
+        <div class="row-gap">
+          <button class="btn" data-action="visit"><svg class="ic"><use href="#i-calendar"/></svg> Ziyaret planla</button>
+          <button class="btn outline" data-action="contact"><svg class="ic"><use href="#i-chat"/></svg> Bize yazın</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="irklar">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">IRK KÜTÜPHANESİ</div>
+          <h2>Hangi dost yaşamınıza uyar?</h2>
+          <p class="sub">Genel eğilimler bilgi amaçlıdır; her hayvanın karakteri ve ihtiyaçları bireyseldir.</p>
+        </div>
+      </div>
+      <div class="breed-grid" id="breed-grid"></div>
+    </section>
+
+    <section class="section" id="saglik">
+      <div class="health">
+        <div class="vaccine-card">
+          <div class="eyebrow">SAĞLIKLI BİR BAŞLANGIÇ</div>
+          <h2>Aşı rehberi</h2>
+          <p class="sub">Dostunuzun türüne ve yaşam evresine göre veteriner görüşmesinde konuşulacak başlıklar. Kesin aşı takvimini veteriner hekiminiz belirler.</p>
+          <div class="seg" id="v-species" role="radiogroup" aria-label="Tür">
+            <button class="active" data-v="dog">Köpek</button><button data-v="cat">Kedi</button>
+          </div>
+          <div class="seg" id="v-stage" role="radiogroup" aria-label="Yaşam evresi">
+            <button class="active" data-v="puppy">Yavru</button><button data-v="adult">Yetişkin</button><button data-v="senior">İleri yaş</button>
+          </div>
+          <ul class="vlist" id="v-output"></ul>
+          <p class="fine"><svg class="ic"><use href="#i-med"/></svg> Bu içerik genel bilgilendirmedir, veteriner muayenesinin yerini tutmaz.</p>
+        </div>
+        <div class="training">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1551717743-49959800b1f6?auto=format&fit=crop&w=900&q=80" alt="Sahibine bakan köpek">
+          <div class="training-body">
+            <div class="eyebrow">EĞİTİM &amp; YAŞAM</div>
+            <h3>Birlikte öğrenin, bağınızı güçlendirin.</h3>
+            <ol class="tips">
+              <li><b>İsim çalışması.</b> Size baktığı an ödüllendirin; kısa ve neşeli tutun.</li>
+              <li><b>Otur – bekle – gel.</b> Önce sakin bir yerde, sonra farklı ortamlarda pekiştirin.</li>
+              <li><b>Tutarlılık.</b> Evdeki herkes aynı kelime ve işaretleri kullansın.</li>
+              <li><b>Destek alın.</b> Zorlu davranışlarda ödül odaklı çalışan bir eğitmene danışın.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="krediler">
+      <div class="section-head center">
+        <div>
+          <div class="eyebrow">KREDİ PAKETLERİ</div>
+          <h2>Dostunuzun hikâyesini daha çok kişi görsün.</h2>
+          <p class="sub">Krediler giriş yaptıktan sonra hesabınıza yüklenir. İlan oluşturma <b data-cost="listing">5</b> kredi, vitrinde öne çıkarma <b data-cost="feature">10</b> kredidir.</p>
+        </div>
+      </div>
+      <div class="pricing" id="pricing"></div>
+      <p class="fine center" id="payment-note"></p>
+    </section>
+
+    <section class="section" id="sss">
+      <div class="faq-wrap">
+        <div>
+          <div class="eyebrow">SIKÇA SORULANLAR</div>
+          <h2>Aklınıza takılanlar</h2>
+          <p class="sub">Başka bir sorunuz mu var? <button class="link" data-action="contact">Bize yazın</button>.</p>
+        </div>
+        <div class="faq">
+          <details><summary>İlanım ne zaman yayına girer?</summary><p>İlanlar yönetici onayından sonra yayınlanır. Onay durumunu “Hesabım” sayfasından takip edebilirsiniz.</p></details>
+          <details><summary>İlanım reddedilirse kredim ne olur?</summary><p>Reddedilen ilanın kredisi hesabınıza otomatik olarak iade edilir ve ret gerekçesi ilanınızın yanında gösterilir.</p></details>
+          <details><summary>Öne çıkarma ne işe yarar?</summary><p>Öne çıkarılan ilanlar 7 gün boyunca listelerin en üstünde ve vitrin rozetiyle gösterilir.</p></details>
+          <details><summary>Kredi satın almak için üye olmam gerekir mi?</summary><p>Evet. Krediler hesabınıza tanımlanır; bu yüzden önce giriş yapmanız ya da ücretsiz hesap oluşturmanız gerekir.</p></details>
+          <details><summary>Çiftliği ziyaret edebilir miyim?</summary><p>Ziyaretler randevuyla yapılır. “Ziyaret planla” formundan uygun tarihinizi iletebilirsiniz.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div>
+        <h2>Yeni bir dost, yeni bir hikâye.</h2>
+        <p>Ücretsiz hesabınızı oluşturun; favorilerinizi, ilanlarınızı ve kredilerinizi tek yerden yönetin.</p>
+      </div>
+      <div class="row-gap">
+        <a class="btn lime lg" href="#/kayit">Hesap oluştur <svg class="ic"><use href="#i-arrow"/></svg></a>
+        <a class="btn glass lg" href="#ilanlar">İlanlara göz at</a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<main id="page" class="view" hidden></main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a class="logo" href="#/"><span class="logo-mark"><svg class="ic"><use href="#i-paw"/></svg></span><span class="logo-text">pati çiftliği</span></a>
+        <p>Sevgiyle büyüyen, güvenle buluşan patiler.</p>
+      </div>
+      <div><h4>Keşfet</h4><a href="#ciftlik">Çiftliğimiz</a><a href="#ilanlar">İlanlar</a><a href="#irklar">Irk rehberi</a><a href="#saglik">Sağlık &amp; eğitim</a></div>
+      <div><h4>Hesap</h4><a href="#/giris">Giriş yap</a><a href="#/kayit">Kayıt ol</a><a href="#/krediler">Kredi yükle</a><a href="#/ilan-ver">İlan ver</a></div>
+      <div><h4>Destek</h4><button class="link" data-action="contact">İletişim</button><button class="link" data-action="privacy">Gizlilik</button><button class="link" data-action="terms">Kullanım koşulları</button></div>
+    </div>
+    <div class="legal"><span>© 2026 Pati Çiftliği</span><span>Ödeme sağlayıcısı bağlanana kadar kredi alımları test modundadır.</span></div>
+  </div>
+</footer>
+
+<dialog id="modal" aria-labelledby="modal-title">
+  <button class="icon-btn modal-close" aria-label="Kapat"><svg class="ic"><use href="#i-close"/></svg></button>
+  <div id="modal-content"></div>
+</dialog>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+<script src="app.js"></script>
+</body>
+</html>
