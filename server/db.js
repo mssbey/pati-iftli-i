@@ -10,6 +10,7 @@ const URL_KEYS = ['DATABASE_URL', 'POSTGRES_URL'];
 export const DATABASE_URL_KEY = URL_KEYS.find(k => process.env[k]) ||
   Object.keys(process.env).sort().find(k => /_(DATABASE_URL|POSTGRES_URL)$/.test(k) && /^postgres(ql)?:\/\//.test(process.env[k])) || null;
 const DATABASE_URL = DATABASE_URL_KEY && process.env[DATABASE_URL_KEY];
+export const EPHEMERAL = !DATABASE_URL && Boolean(process.env.VERCEL);
 const PROD = process.env.NODE_ENV === 'production';
 export const DATA_DIR = process.env.DATA_DIR || join(import.meta.dirname, '..', 'data');
 // Giriş ekranında gösterilen herkese açık demo üye. Gerçek yayından önce DEMO_ACCOUNT=0 ile kapatın.
@@ -40,10 +41,16 @@ async function getDriver() {
       },
     };
   } else {
-    if (process.env.VERCEL) throw new Error('DATABASE_URL tanımlı değil. Vercel projesinin Storage sekmesinden bir Neon (Postgres) veritabanı bağlayıp yeniden yayınlayın (Redeploy).');
     const { PGlite } = await import('@electric-sql/pglite');
-    await mkdir(DATA_DIR, { recursive: true });
-    const db = new PGlite(join(DATA_DIR, 'pg'));
+    let db;
+    if (EPHEMERAL) {
+      // Vercel'de veritabanı bağlanana kadar: bellek içi Postgres. Örnek uykuya geçince veriler sıfırlanır.
+      console.warn('DATABASE_URL yok: geçici bellek içi veritabanı kullanılıyor (veriler kalıcı değil).');
+      db = new PGlite();
+    } else {
+      await mkdir(DATA_DIR, { recursive: true });
+      db = new PGlite(join(DATA_DIR, 'pg'));
+    }
     driver = {
       exec: sql => db.exec(sql),
       query: async (sql, params) => (await db.query(sql, params)).rows,

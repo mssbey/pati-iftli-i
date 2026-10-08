@@ -50,6 +50,8 @@ Geliştirirken `npm run dev` sunucuyu dosya değişikliklerinde yeniden başlat�
    - `ADMIN_EMAIL`, `ADMIN_PASSWORD` — yönetici hesabı (güçlü bir şifre seçin).
    - `PAYMENT_PROVIDER=test` — gerçek ödeme bağlanana kadar kredi alımını test modunda açmak için. Eklenmezse satış kapalı kalır.
 4. **Redeploy** (ortam değişkenleri yalnızca yeni yayında geçerli olur). Tablolar ve örnek ilanlar ilk API isteğinde otomatik oluşturulur.
+Veritabanı bağlanmadan yayınlanırsa site **geçici modda** çalışır: Vercel içinde bellek üzerinde Postgres (PGlite) açılır, fotoğraflar ilan kaydında tutulur. Her şey çalışır ama sunucu uykuya geçtiğinde veriler sıfırlanır. Kalıcı veri için Neon'u bağlayıp redeploy etmeniz yeterli.
+
 5. Kontrol: `https://<site>/api/health` hangi parçanın (veritabanı, Blob, yönetici, ödeme modu) eksik olduğunu gösterir.
 
 Not: Giriş denemesi sınırlaması bellek içidir; sunucusuz ortamda her örnek için ayrı sayılır.

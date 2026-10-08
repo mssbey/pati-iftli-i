@@ -13,10 +13,8 @@
     "check": "node --check dist/app.js && node --check server/index.js && node --check server/api.js && node --check server/db.js && node --check server/storage.js && node --check api/index.js"
   },
   "dependencies": {
+    "@electric-sql/pglite": "^0.5.8",
     "@vercel/blob": "^2.8.1",
     "pg": "^8.23.1"
-  },
-  "devDependencies": {
-    "@electric-sql/pglite": "^0.5.8"
   }
 }

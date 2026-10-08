@@ -1,6 +1,6 @@
 import { randomBytes } from 'node:crypto';
-import { query, one, tx, balanceOf, ready, DEMO, DATABASE_URL_KEY } from './db.js';
-import { storeImage, deleteImage, storageReady } from './storage.js';
+import { query, one, tx, balanceOf, ready, DEMO, DATABASE_URL_KEY, EPHEMERAL } from './db.js';
+import { storeImage, deleteImage, storageMode } from './storage.js';
 import { hashPassword, verifyPassword, newToken, sha256 } from './security.js';
 
 const PROD = process.env.NODE_ENV === 'production';
@@ -164,7 +164,6 @@ async function savePhoto(dataUrl) {
   if (bytes.length > 3 * 1024 * 1024) throw new HttpError(413, 'Fotoğraf en fazla 3 MB olabilir.');
   const kind = IMAGE_TYPES.find(t => t.test(bytes));
   if (!kind) throw new HttpError(400, 'Fotoğraf dosyası tanınamadı.');
-  if (!storageReady()) throw new HttpError(503, 'Fotoğraf depolama henüz yapılandırılmadı. İlanı fotoğrafsız gönderebilirsiniz.');
   return storeImage(bytes, kind.ext, kind.type);
 }
 
@@ -188,8 +187,8 @@ route('GET', '/api/config', () => ({
 route('GET', '/api/health', async () => {
   const health = {
     database: 'ok',
-    databaseUrl: DATABASE_URL_KEY || 'tanımlı değil',
-    photoStorage: storageReady() ? 'ok' : 'BLOB_READ_WRITE_TOKEN eksik',
+    databaseUrl: DATABASE_URL_KEY || (EPHEMERAL ? 'yok: geçici bellek içi veritabanı (veriler kalıcı değil)' : 'yok: yerel PGlite'),
+    photoStorage: { blob: 'Vercel Blob', inline: 'ilan kaydında (Blob bağlı değil)', local: 'data/uploads' }[storageMode()],
     paymentMode: PAYMENT_MODE,
     adminFromEnv: Boolean(process.env.ADMIN_EMAIL && process.env.ADMIN_PASSWORD),
     demoAccount: Boolean(DEMO),
